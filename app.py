@@ -29,29 +29,6 @@ def upload_files():
                 file.save(save_path)
         return redirect('/')
     
-from flask import jsonify
-
-@app.route('/delete_all', methods=['DELETE'])
-def delete_all_files():
-    folder = app.config['UPLOAD_FOLDER']
-    deleted_files = []
-
-    for root, dirs, files in os.walk(folder, topdown=False):
-        for file in files:
-            file_path = os.path.join(root, file)
-            try:
-                os.remove(file_path)
-                deleted_files.append(file_path)
-            except Exception as e:
-                print(f"Failed to delete {file_path}: {e}")
-        for dir in dirs:
-            try:
-                os.rmdir(os.path.join(root, dir))
-            except OSError:
-                pass  # Skip non-empty dirs
-
-    return jsonify({'status': 'success', 'deleted': deleted_files})
-
     
     # Show all uploaded files
     uploaded_files = []
