@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Files and Folders</title>
+</head>
+<body>
+    <h1>Upload PDF and Word Files (or folders)</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="files" webkitdirectory multiple required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <h2>Uploaded Files</h2>
+    <ul>
+        {% for file in files %}
+            <li><a href="{{ url_for('uploaded_file', filename=file) }}">{{ file }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
